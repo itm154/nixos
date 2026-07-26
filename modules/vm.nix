@@ -3,10 +3,6 @@
 # instead of having to reboot each time.
 { inputs, den, ... }:
 {
-
-  # USER TODO: remove this tty-autologin used for the VM
-  den.aspects.helios.includes = [ (den.batteries.tty-autologin "itm154") ];
-
   perSystem =
     { pkgs, ... }:
     {
@@ -17,7 +13,11 @@
             host = inputs.self.nixosConfigurations.helios.config;
           in
           ''
-            ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm "$@"
+            ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm \
+            --enable-kvm \
+            -m 4096 \
+            -smp 4 \
+            "$@"
           '';
       };
     };

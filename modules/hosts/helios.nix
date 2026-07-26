@@ -3,7 +3,10 @@
   # host aspect
   den.aspects.helios = {
     # host NixOS configuration
-    includes = [ den.batteries.hostname ];
+    includes = [
+      den.batteries.hostname
+      den.aspects.plasma
+    ];
     nixos =
       { pkgs, ... }:
       {
