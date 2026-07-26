@@ -14,10 +14,12 @@
           in
           ''
             ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm \
-            --enable-kvm \
-            -m 4096 \
-            -smp 4 \
-            "$@"
+              --enable-kvm \
+              -cpu host \
+              -m 6G \
+              -smp 6,sockets=1,cores=6,threads=1 \
+              -vga virtio \
+              "$@"
           '';
       };
     };

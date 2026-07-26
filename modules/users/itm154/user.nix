@@ -5,6 +5,9 @@
     includes = [
       den.batteries.define-user
       den.batteries.primary-user
+      den.batteries.host-aspects
+
+      (den.batteries.user-shell "fish")
     ];
 
     homeManager =
@@ -15,7 +18,6 @@
 
     user = {
       initialPassword = "1234";
-      isNormalUser = true;
     };
   };
 }
