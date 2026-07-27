@@ -3,6 +3,17 @@
 {
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
+  nixConfig = {
+    extra-substituters = [
+      "https://attic.xuyh0120.win/lantian"
+      "https://cache.xinux.uz"
+    ];
+    extra-trusted-public-keys = [
+      "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+      "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
+    ];
+  };
+
   inputs = {
     den.url = "github:denful/den";
     flake-file.url = "github:vic/flake-file";
@@ -15,6 +26,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
     plasma-manager = {
       url = "github:nix-community/plasma-manager";

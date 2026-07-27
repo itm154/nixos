@@ -6,6 +6,7 @@
     includes = [
       den.batteries.hostname
       den.aspects.plasma
+      (den.aspects.kernel-cachyos "latest-lto-x86_64-v3")
     ];
     nixos =
       { pkgs, ... }:
