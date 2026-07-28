@@ -12,7 +12,16 @@
     nixos =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.hello ];
+        # Uncomment this on real hardware
+        # imports = [
+        # 	/etc/nixos/hardware-configuration.nix
+        # ];
+
+        environment.systemPackages = [
+          pkgs.neovim
+          pkgs.kitty
+          pkgs.hello
+        ];
       };
 
     # host provides default home environment for its users
