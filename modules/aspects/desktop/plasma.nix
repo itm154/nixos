@@ -14,6 +14,16 @@
     nixos = { pkgs, ... }: {
       services.displayManager.plasma-login-manager.enable = true;
       services.desktopManager.plasma6.enable = true;
+
+      environment.sessionVariables = {
+        NIXOS_OZONE_WL = "1";
+        MOZ_ENABLE_WAYLAND = "1";
+        GDK_BACKEND = "wayland,x11";
+        CLUTTER_BACKEND = "wayland";
+        ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        GTK_USE_PORTAL = "1";
+        SDL_VIDEODRIVER = "wayland";
+      };
     };
 
     homeManager = { pkgs, ... }: {
@@ -31,7 +41,7 @@
         python314Packages.kde-material-you-colors
       ];
 
-      xdg.configFile."klassy/klassyrc".source = ./presets/klassyrc;
+      xdg.configFile."klassy/klassyrc".source = ../files/klassyrc;
 
       programs.plasma = {
         enable = true;

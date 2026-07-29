@@ -8,6 +8,8 @@
       den.aspects.plasma
       (den.aspects.kernel-cachyos "latest-lto-x86_64-v3")
       (den.aspects.limine { secure-boot = true; })
+
+      den.aspects.devtools
     ];
     nixos =
       { pkgs, ... }:
