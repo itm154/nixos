@@ -10,6 +10,7 @@
       (den.aspects.limine { secure-boot = true; })
 
       den.aspects.devtools
+      den.aspects.kitty
     ];
     nixos =
       { pkgs, ... }:
@@ -21,7 +22,6 @@
 
         environment.systemPackages = [
           pkgs.neovim
-          pkgs.kitty
           pkgs.hello
         ];
       };
