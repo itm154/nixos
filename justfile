@@ -24,10 +24,11 @@ update-input input:
 	nix flake update {{input}}
 
 # Rebuild and switch NixOS system
-switch *args:
-	nh os switch . -H {{hostname}} {{args}}
-	just home
+[arg("host", long="host")]
+switch host=hostname *args:
+	nix run .#{{host}} -- {{args}}
 
 # Rebuild and switch Home Manager profile
-home *args:
-	nh home switch . -c {{username}} {{args}}
+[arg("user", long="user")]
+home user=username *args:
+	nix run .#{{user}} -- {{args}}
