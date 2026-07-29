@@ -27,6 +27,8 @@
         networkmanager.enable = true;
         useDHCP = lib.mkDefault true;
       };
+      services.resolved.enable = true;
+      programs.ssh.startAgent = true;
 
       # Localization & Timezone
       time.timeZone = "Asia/Kuching";
@@ -39,34 +41,26 @@
         ];
       };
 
-      # Keyboard & X Server
-      services.xserver.xkb = {
-        layout = "us";
-        variant = "";
-      };
-
-      # Audio & Realtime Scheduling
-      security.rtkit.enable = true;
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        jack.enable = true;
-      };
-
       # Security & Privilege Escalation
       security.polkit.enable = true;
 
-      # Font Subsystem
-      fonts.fontconfig.enable = true;
-
-      # Home-manager settings
+      # Others
       programs.nh.enable = true;
       environment.systemPackages = with pkgs; [
         git
         just
+        curl
+        wget
+        ripgrep
+        fzf
+        fd
+        pciutils
+        usbutils
+        htop
       ];
+
+      # Override this if using plasma
+      services.gnome.gnome-keyring.enable = lib.mkDefault true;
     };
 
     homeManager = { pkgs, ... }: {
@@ -74,6 +68,7 @@
       programs.home-manager.enable = true;
     };
 
+    # This is not Den's home manager module
     home-manager = { pkgs, ... }: {
       overwriteBackup = true;
       backupFileExtension = "backup";

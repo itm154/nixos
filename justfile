@@ -18,6 +18,10 @@ update:
 	nix run .#write-flake
 	nix flake update
 
+# Rewrite flake.nix for new inputs
+flake:
+	nix run .#write-flake
+
 # Update a specific flake input and regenerate flake.nix (usage: just update-input <input>)
 update-input input:
 	nix run .#write-flake

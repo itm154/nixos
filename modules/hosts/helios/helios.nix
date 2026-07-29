@@ -11,6 +11,7 @@
 
       den.aspects.devtools
       den.aspects.kitty
+      den.aspects.zen-browser
     ];
     nixos =
       { pkgs, ... }:
