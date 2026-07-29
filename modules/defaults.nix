@@ -72,6 +72,7 @@
       # Home-manager settings
       programs.nh.enable = true;
       environment.systemPackages = with pkgs; [
+        git
         just
       ];
     };
@@ -79,8 +80,12 @@
     homeManager = { pkgs, ... }: {
       home.stateVersion = "26.05";
       programs.home-manager.enable = true;
+    };
 
-      home-manager.backupCommand = "${pkgs.trash-cli}/bin/trash-put";
+    home-manager = { pkgs, ... }: {
+      overwriteBackup = true;
+      backupFileExtension = "backup";
+      backupCommand = "${pkgs.trash-cli}/bin/trash-put";
     };
   };
 
