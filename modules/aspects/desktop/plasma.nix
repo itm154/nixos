@@ -21,16 +21,6 @@
         desktopManager.plasma6.enable = true;
         gnome.gnome-keyring.enable = false;
       };
-      security.pam.services = {
-        plasma-login-manager.kwallet.enable = true;
-        sddm.kwallet.enable = true;
-        login.kwallet.enable = true;
-      };
-
-      environment.systemPackages = [
-        pkgs.kdePackages.kwalletmanager
-        pkgs.kdePackages.kwallet-pam
-      ];
 
       environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";

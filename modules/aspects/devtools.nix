@@ -7,6 +7,7 @@
       den.aspects.bat
       den.aspects.btop
       den.aspects.yazi
+      den.aspects.git
     ];
   };
 }
