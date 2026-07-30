@@ -19,6 +19,17 @@
         auto-optimise-store = true;
       };
 
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+
+      nix.optimise = {
+        automatic = true;
+        dates = [ "weekly" ];
+      };
+
       # Hardware & Firmware
       hardware.enableRedistributableFirmware = true;
 

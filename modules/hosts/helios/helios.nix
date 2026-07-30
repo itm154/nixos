@@ -7,7 +7,7 @@
       den.batteries.hostname
       den.aspects.plasma
       (den.aspects.kernel-cachyos "latest-lto-x86_64-v3")
-      (den.aspects.limine { secure-boot = true; })
+      (den.aspects.bootloader { secureBoot = true; })
 
       den.aspects.devtools
       den.aspects.kitty
