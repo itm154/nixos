@@ -8,6 +8,11 @@
         home-manager.follows = "home-manager";
       };
     };
+
+    kwin-effects-better-blur-dx = {
+      url = "github:xarblu/kwin-effects-better-blur-dx";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   den.aspects.plasma = {
@@ -33,7 +38,7 @@
       };
     };
 
-    homeManager = { pkgs, ... }: {
+    homeManager = { pkgs, system, ... }: {
       imports = [
         inputs.plasma-manager.homeModules.plasma-manager
       ];
@@ -46,6 +51,7 @@
         klassy
         bibata-cursors
         python314Packages.kde-material-you-colors
+        inputs.kwin-effects-better-blur-dx.packages.${system}.default
       ];
 
       xdg.configFile."klassy/klassyrc".source = ../files/klassyrc;

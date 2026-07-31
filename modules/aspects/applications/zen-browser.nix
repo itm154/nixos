@@ -5,9 +5,9 @@
   };
 
   den.aspects.zen-browser = {
-    homeManager = { pkgs, ... }: {
+    homeManager = { pkgs, system, ... }: {
       home.packages = [
-        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.zen-browser.packages.${system}.default
       ];
     };
   };
