@@ -30,8 +30,8 @@ update-input input:
 
 # Rebuild and switch NixOS system
 switch *args:
-	nix run .#{{hostname}} -- {{args}}
+	nix run .#{{hostname}} -- switch {{args}}
 
 # Rebuild and switch home manager configuration
 home *args:
-	nix run .#{{username}} -- {{args}}
+	nix run .#{{username}} -- switch {{args}}

@@ -23,6 +23,7 @@
         };
         gvfs.enable = true;
         udisks2.enable = true;
+        flatpak.enable = true;
       };
 
       security.rtkit.enable = true;
@@ -42,6 +43,7 @@
         noto-fonts-cjk-serif
         noto-fonts-color-emoji
       ];
+
     };
   };
 }
