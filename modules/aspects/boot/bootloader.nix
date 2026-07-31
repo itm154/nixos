@@ -9,8 +9,8 @@
           limine = {
             enable = true;
             maxGenerations = 5;
-            # if secureBoot is true
           }
+          # if secureBoot is true
           // lib.optionalAttrs secureBoot {
             secureBoot = {
               enable = true;

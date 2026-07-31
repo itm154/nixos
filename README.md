@@ -1,33 +1,48 @@
-# Getting Started Guide
+# (WIP) NixOS configuration
 
-Steps you can follow after cloning this template:
+## Install
 
-- Be sure to read the [den documentation](https://den.denful.dev)
+1. Clone the repo
 
-- Update den input.
-
-```console
-nix flake update den
+```sh
+git clone https://github.com/itm154/nixos.git
 ```
 
-- Edit [modules/hosts.nix](modules/hosts.nix)
+2. Rebuild system
 
-- Build
-
-```console
-# default action is build
-nix run .#igloo
-
-# pass any other nh action
-nix run .#igloo -- switch
+```sh
+nix run .#hostname -- switch --impure
 ```
 
-- Run the VM
+## Secure Boot
 
-We recommend to use a VM develop cycle so you can play with the system before applying to your hardware.
+1. Turn off secure boot and reset keys to enter setup mode
+2. On the next reboot in the rebuilt system, run:
 
-See [modules/vm.nix](modules/vm.nix)
+```bash
+sudo sbctl enroll-keys -m -f
+```
 
-```console
-nix run .#vm
+3. Verify secure boot
+
+```sh
+sudo sbctl status # Setup mode should say disabled with a green checkmark
+sudo sbctl verify # limine entry should be signed
+```
+
+_Do not sign the kernels, limine will throw up a checksum mismatch and panic_
+
+## Quick commands
+
+```sh
+just --list
+Available recipes:
+    check              # Check flake outputs and syntax
+    default            # List available commands
+    home *args         # Rebuild and switch home manager configuration
+    switch *args       # Rebuild and switch NixOS system
+    update             # Update all flake inputs and regenerate flake.nix
+    update-input input # Update a specific flake input and regenerate flake.nix
+    vm                 # Run system inside VM
+    write              # Rewrite flake.nix
 ```

@@ -7,32 +7,31 @@ default:
 
 # Run system inside VM
 vm:
+	-rm -f ./*.qcow2
 	nix run .#vm
 
 # Check flake outputs and syntax
 check:
 	nix flake check
 
+# Rewrite flake.nix
+write:
+	nix run .#write-flake
+
 # Update all flake inputs and regenerate flake.nix
 update:
 	nix run .#write-flake
 	nix flake update
 
-# Rewrite flake.nix for new inputs
-flake:
-	nix run .#write-flake
-
-# Update a specific flake input and regenerate flake.nix (usage: just update-input <input>)
+# Update a specific flake input and regenerate flake.nix
 update-input input:
 	nix run .#write-flake
 	nix flake update {{input}}
 
 # Rebuild and switch NixOS system
-[arg("host", long="host")]
-switch host=hostname *args:
-	nix run .#{{host}} -- {{args}}
+switch *args:
+	nix run .#{{hostname}} -- {{args}}
 
-# Rebuild and switch Home Manager profile
-[arg("user", long="user")]
-home user=username *args:
-	nix run .#{{user}} -- {{args}}
+# Rebuild and switch home manager configuration
+home *args:
+	nix run .#{{username}} -- {{args}}
