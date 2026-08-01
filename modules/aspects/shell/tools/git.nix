@@ -1,8 +1,29 @@
 { lib, den, ... }: {
+
   den.aspects.git = {
-    homeManager = { pkgs, ... }: {
+    includes = [
+      den.aspects.sops
+    ];
+
+    homeManager = { pkgs, osConfig, ... }: {
+      programs.ssh = {
+        enable = true;
+        settings = {
+          "github.com" = {
+            HostName = "github.com";
+            User = "git";
+            IdentityFile = osConfig.sops.secrets.github_ssh_key.path;
+          };
+        };
+      };
+
       programs.git = {
         enable = true;
+        signing = {
+          format = "ssh";
+          signByDefault = true;
+          key = osConfig.sops.secrets.signing_ssh_key.path;
+        };
         settings = {
           include = {
             path = "${
@@ -59,15 +80,6 @@
             autoStash = true;
             missingCommitsCheck = "warn";
           };
-
-          # TODO: Set this up after sops-nix
-          # commit = {
-          #   gpgsign = true;
-          # };
-
-          # user = {
-          #   signingkey = "4EE438CD8805C386";
-          # };
         };
       };
 

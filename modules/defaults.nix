@@ -39,7 +39,6 @@
         useDHCP = lib.mkDefault true;
       };
       services.resolved.enable = true;
-      programs.ssh.startAgent = true;
 
       # Localization & Timezone
       time.timeZone = "Asia/Kuching";
