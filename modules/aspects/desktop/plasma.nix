@@ -78,16 +78,6 @@
             theme = "";
           };
         };
-
-        hotkeys = {
-          commands = {
-            "launch-terminal" = {
-              name = "Launch terminal";
-              command = "konsole";
-              key = "Meta+Enter";
-            };
-          };
-        };
       };
     };
 
