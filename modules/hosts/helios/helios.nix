@@ -9,9 +9,6 @@
       (den.aspects.kernel-cachyos "latest-lto-x86_64-v3")
       (den.aspects.bootloader { secureBoot = true; })
 
-      den.aspects.devtools
-      den.aspects.kitty
-      den.aspects.zen-browser
     ];
     nixos =
       { pkgs, ... }:

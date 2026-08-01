@@ -10,6 +10,7 @@
         fishPlugins.bang-bang
       ];
     };
+
     homeManager = { pkgs, ... }: {
       programs.fish = {
         enable = true;

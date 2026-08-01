@@ -8,6 +8,11 @@
       den.batteries.host-aspects
 
       (den.batteries.user-shell "fish")
+
+      den.aspects.devtools
+
+      den.aspects.kitty
+      den.aspects.zen-browser
     ];
 
     homeManager =
