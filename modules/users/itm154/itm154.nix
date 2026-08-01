@@ -9,8 +9,10 @@
 
       (den.batteries.user-shell "fish")
 
+      # Git, terminal, cli applications, etc...
       den.aspects.devtools
 
+      # Applications
       den.aspects.kitty
       den.aspects.zen-browser
     ];

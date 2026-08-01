@@ -9,10 +9,9 @@
           limine = {
             enable = true;
             maxGenerations = 5;
-          }
-          # if secureBoot is true
-          // lib.optionalAttrs secureBoot {
-            secureBoot = {
+
+            # if secureBoot is enabled
+            secureBoot = lib.mkIf secureBoot {
               enable = true;
               autoGenerateKeys = true;
               autoEnrollKeys.enable = true;
