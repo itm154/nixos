@@ -52,7 +52,14 @@
         bibata-cursors
         python314Packages.kde-material-you-colors
         inputs.kwin-effects-better-blur-dx.packages.${system}.default
+
+        kdePackages.ksshaskpass
       ];
+
+      home.sessionVariables = {
+        SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+        SSH_ASKPASS_REQUIRE = "prefer";
+      };
 
       xdg.configFile."klassy/klassyrc".source = ../files/klassyrc;
 

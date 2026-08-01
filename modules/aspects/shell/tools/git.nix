@@ -3,19 +3,16 @@
   den.aspects.git = {
     includes = [
       den.aspects.sops
+      den.aspects.ssh
     ];
 
     homeManager = { pkgs, osConfig, ... }: {
-      programs.ssh = {
-        enable = true;
-        enableDefaultConfig = false;
-        settings = {
-          "github.com" = {
-            HostName = "github.com";
-            User = "git";
-            IdentityFile = osConfig.sops.secrets.github_ssh_key.path;
-            IdentitiesOnly = "yes";
-          };
+      programs.ssh.settings = {
+        "github.com" = {
+          HostName = "github.com";
+          User = "git";
+          IdentityFile = osConfig.sops.secrets.github_ssh_key.path;
+          IdentitiesOnly = "yes";
         };
       };
 
