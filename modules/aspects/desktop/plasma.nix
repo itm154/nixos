@@ -27,6 +27,12 @@
         gnome.gnome-keyring.enable = false;
       };
 
+      security.pam.services = {
+        plasma-login-manager.kwallet.enable = true;
+        sddm.kwallet.enable = true;
+        login.kwallet.enable = true;
+      };
+
       environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";
@@ -59,6 +65,21 @@
       home.sessionVariables = {
         SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
         SSH_ASKPASS_REQUIRE = "prefer";
+        PAM_KWALLET5_LOGIN = "/run/user/$UID/kwallet5.socket";
+      };
+
+      systemd.user.services.kwallet-socket-bridge = {
+        Unit = {
+          Description = "Bridge PAM KWallet5 socket to KWallet6";
+          Before = [ "plasma-workspace.target" ];
+        };
+        Service = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.bash}/bin/bash -c 'if [ -S /run/user/$UID/kwallet5.socket ]; then ln -sf /run/user/$UID/kwallet5.socket /run/user/$UID/kwallet6.socket; fi'";
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
       };
 
       xdg.configFile."klassy/klassyrc".source = ../files/klassyrc;
@@ -68,6 +89,12 @@
         overrideConfig = false;
 
         configFile = {
+          "kwalletrc"."Wallet" = {
+            "Default Wallet" = "kdewallet";
+            "Enabled" = "true";
+            "First Use" = "false";
+          };
+
           "kwinrc"."org.kde.kdecoration2" = {
             "BorderSize" = "None";
             "BorderSizeAuto" = "false";
