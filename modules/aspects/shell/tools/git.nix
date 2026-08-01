@@ -13,6 +13,7 @@
             HostName = "github.com";
             User = "git";
             IdentityFile = osConfig.sops.secrets.github_ssh_key.path;
+            IdentitiesOnly = "yes";
           };
         };
       };
@@ -55,10 +56,16 @@
 
           url = {
             "git@github.com:" = {
-              insteadOf = "github:";
+              insteadOf = [
+                "github:"
+                "https://github.com"
+              ];
             };
             "git@github.com:itm154/" = {
-              insteadOf = "itm154:";
+              insteadOf = [
+                "itm154:"
+                "https://github.com/itm154/"
+              ];
             };
           };
 
