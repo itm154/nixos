@@ -8,7 +8,7 @@
       ...
     }:
     {
-      nixos = {
+      nixos = { config, ... }: {
         hardware.graphics = {
           enable = true;
           enable32Bit = true;
@@ -18,6 +18,7 @@
 
         hardware.nvidia = {
           inherit open;
+          package = config.boot.kernelPackages.nvidiaPackages.latest;
           modesetting.enable = true;
           powerManagement = {
             enable = true;
