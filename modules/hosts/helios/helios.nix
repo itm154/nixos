@@ -11,6 +11,7 @@
       (den.aspects.nvidia { enablePrime = true; })
 
       den.aspects.tailscale
+      den.aspects.homelab-stack
     ];
     nixos =
       { pkgs, ... }:
