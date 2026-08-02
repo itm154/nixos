@@ -9,6 +9,8 @@
       (den.aspects.kernel-cachyos "latest-lto-x86_64-v3")
       (den.aspects.bootloader { secureBoot = true; })
       (den.aspects.nvidia { enablePrime = true; })
+
+      den.aspects.tailscale
     ];
     nixos =
       { pkgs, ... }:

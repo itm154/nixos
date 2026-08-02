@@ -24,6 +24,11 @@
       sops.secrets.signing_ssh_key = {
         owner = "itm154";
       };
+
+      # Temporarry
+      sops.secrets.tailscale_auth_key = {
+        owner = "itm154";
+      };
     };
   };
 }

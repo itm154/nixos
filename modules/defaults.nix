@@ -35,6 +35,15 @@
 
       # Networking
       networking = {
+        firewall = {
+          enable = true;
+          allowedTCPPorts = [
+            # wip
+          ];
+          allowedUDPPorts = [
+            # wip
+          ];
+        };
         networkmanager.enable = true;
         useDHCP = lib.mkDefault true;
       };
