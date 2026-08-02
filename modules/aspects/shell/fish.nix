@@ -28,10 +28,10 @@
           }
         ];
         shellAliases = {
-          ls = "${pkgs.eza}/bin/eza -al --color=always --group-directories-first --icons";
-          la = "${pkgs.eza}/bin/eza -a --color=always --group-directories-first --icons";
-          ll = "${pkgs.eza}/bin/eza -l --color=always --group-directories-first --icons";
-          lt = "${pkgs.eza}/bin/eza -aT --color=always --group-directories-first --icons";
+          ls = "${pkgs.eza}/bin/eza -al --color=always --group-directories-first --icons auto";
+          la = "${pkgs.eza}/bin/eza -a --color=always --group-directories-first --icons auto";
+          ll = "${pkgs.eza}/bin/eza -l --color=always --group-directories-first --icons auto";
+          lt = "${pkgs.eza}/bin/eza -aT --color=always --group-directories-first --icons auto";
           "l." = "${pkgs.eza}/bin/eza -a | grep -e '^\\.'";
         };
       };
