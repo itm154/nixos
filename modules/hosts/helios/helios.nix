@@ -11,7 +11,8 @@
       (den.aspects.nvidia { enablePrime = true; })
 
       den.aspects.tailscale
-      den.aspects.podman
+      # den.aspects.podman
+      den.aspects.docker
       den.aspects.adguardhome
     ];
     nixos =
