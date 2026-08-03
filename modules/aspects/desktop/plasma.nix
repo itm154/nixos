@@ -42,6 +42,8 @@
         GTK_USE_PORTAL = "1";
         SDL_VIDEODRIVER = "wayland";
       };
+
+      services.ddccontrol.enable = true;
     };
 
     homeManager = { pkgs, system, ... }: {
