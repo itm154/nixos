@@ -16,6 +16,13 @@
               autoGenerateKeys = true;
               autoEnrollKeys.enable = true;
             };
+
+            extraEntries = ''
+              /Windows 11
+                comment: Windows Boot Manager
+                protocol: efi_chainload
+                image_path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+            '';
           };
           systemd-boot.enable = lib.mkForce false;
           efi.canTouchEfiVariables = true;
