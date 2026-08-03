@@ -7,7 +7,12 @@
   den.aspects.zen-browser = {
     homeManager = { pkgs, system, ... }: {
       home.packages = [
-        inputs.zen-browser.packages.${system}.default
+        (pkgs.wrapFirefox inputs.zen-browser.packages.${system}.zen-browser-unwrapped {
+          pname = "zen-browser";
+          nativeMessagingHosts = [
+            pkgs.kdePackages.plasma-browser-integration
+          ];
+        })
       ];
     };
   };
