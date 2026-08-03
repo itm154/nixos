@@ -12,7 +12,7 @@
       # Git, terminal, cli applications, etc...
       den.aspects.devtools
 
-      # Applications
+      # Applications that require config
       den.aspects.kitty
       den.aspects.zen-browser
     ];
@@ -20,7 +20,10 @@
     homeManager =
       { pkgs, ... }:
       {
-        home.packages = [ pkgs.htop ];
+        # Applications that dont require specific config
+        home.packages = with pkgs; [
+          lazydocker
+        ];
       };
 
     user = {
