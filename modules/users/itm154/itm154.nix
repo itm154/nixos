@@ -15,6 +15,7 @@
       # Applications that require config
       den.aspects.kitty
       den.aspects.zen-browser
+      den.aspects.discord
     ];
 
     homeManager =

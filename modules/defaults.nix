@@ -84,6 +84,7 @@
 
     homeManager = { pkgs, ... }: {
       home.stateVersion = "26.05";
+      nixpkgs.config.allowUnfree = true;
       programs.home-manager.enable = true;
     };
 
