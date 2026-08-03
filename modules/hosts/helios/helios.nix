@@ -18,15 +18,9 @@
     nixos =
       { pkgs, ... }:
       {
-        # Uncomment this on real hardware
-        # imports = [
-        #	Requires --impure during rebuild
-        # 	/etc/nixos/hardware-configuration.nix
-        #
-        # Or regenerate a hardware-configuration.nix file into _hardware-configuration/
-        # nixos-generate-config
-        #		./_hardware-configuration/hardware-configuration.nix
-        # ];
+	imports = [
+		/etc/nixos/hardware-configuration.nix
+	];
 
         environment.systemPackages = with pkgs; [ neovim ];
       };
