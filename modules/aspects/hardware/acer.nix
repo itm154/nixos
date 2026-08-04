@@ -26,15 +26,23 @@
               "format"
             ];
 
-            makeFlags =
+            makeFlags = lib.unique (
               (builtins.filter (x: !(lib.hasPrefix "O=" x || lib.hasPrefix "--eval=" x)) kernel.makeFlags)
               ++ [
                 "KDIR=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
-              ];
+              ]
+              ++
+                lib.optionals
+                  (kernel.stdenv.cc.isClang or false || lib.any (lib.hasPrefix "LLVM=") kernel.makeFlags)
+                  [
+                    "LLVM=1"
+                    "LLVM_IAS=1"
+                  ]
+            );
 
             buildPhase = ''
               runHook preBuild
-              make -C ${kernel.dev}/lib/modules/${kernel.modDirVersion}/build M=$(pwd) "''${makeFlagsArray[@]}" LLVM=1 LLVM_IAS=1 modules
+              make -C ${kernel.dev}/lib/modules/${kernel.modDirVersion}/build M=$(pwd) $makeFlags modules
               runHook postBuild
             '';
 
