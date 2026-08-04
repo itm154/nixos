@@ -1,3 +1,8 @@
+# WARNING THIS IS AI SLOP
+# But to my credit i did this on my own 2 years ago
+# https://github.com/frederik-h/acer-wmi-battery/issues/60
+# I just didn't know how to deal with CLANG and GCC optionals
+
 { den, lib, ... }: {
   den.aspects.acer = {
     nixos =
