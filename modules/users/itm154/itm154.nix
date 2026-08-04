@@ -16,6 +16,7 @@
       den.aspects.kitty
       den.aspects.zen-browser
       den.aspects.discord
+      den.aspects.mpv
     ];
 
     homeManager =
