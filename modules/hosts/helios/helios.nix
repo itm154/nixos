@@ -9,6 +9,7 @@
       (den.aspects.kernel-cachyos "latest-lto-x86_64-v3")
       (den.aspects.bootloader { secureBoot = true; })
       den.aspects.plymouth
+      den.aspects.acer
       den.aspects.plasma
 
       # Applications and services
