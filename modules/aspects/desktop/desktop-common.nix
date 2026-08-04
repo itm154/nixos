@@ -31,8 +31,6 @@
 
       security.rtkit.enable = true;
 
-      fonts.fontconfig.enable = true;
-
       xdg.portal.enable = true;
 
       programs.appimage = {
@@ -40,13 +38,15 @@
         binfmt = true;
       };
 
-      fonts.packages = with pkgs; [
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-cjk-serif
-        noto-fonts-color-emoji
-      ];
-
+      fonts = {
+        fontconfig.enable = true;
+        enableDefaultPackages = true;
+        fontDir.enable = true;
+        packages = with pkgs; [
+          noto-fonts
+          corefonts
+        ];
+      };
     };
   };
 }

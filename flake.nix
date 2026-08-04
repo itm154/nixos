@@ -15,6 +15,10 @@
   };
 
   inputs = {
+    appgrid = {
+      url = "github:xarbit/plasma6-applet-appgrid";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     den.url = "github:denful/den";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {

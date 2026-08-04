@@ -8,7 +8,10 @@
         home-manager.follows = "home-manager";
       };
     };
-
+    appgrid = {
+      url = "github:xarbit/plasma6-applet-appgrid";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     kwin-effects-better-blur-dx = {
       url = "github:xarblu/kwin-effects-better-blur-dx";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,6 +67,7 @@
         bibata-cursors
         python314Packages.kde-material-you-colors
         inputs.kwin-effects-better-blur-dx.packages.${system}.default
+        inputs.appgrid.packages.${system}.default
 
         kdePackages.ksshaskpass
       ];
