@@ -22,15 +22,12 @@
       den.aspects.logiops
       (den.aspects.nvidia { enablePrime = true; })
     ];
-    nixos =
-      { pkgs, ... }:
-      {
-        imports = [
-          /etc/nixos/hardware-configuration.nix
-        ];
 
-        environment.systemPackages = with pkgs; [ neovim ];
-      };
+    nixos = { pkgs, ... }: {
+      imports = [ /etc/nixos/hardware-configuration.nix ];
+
+      environment.systemPackages = with pkgs; [ neovim ];
+    };
 
     # host provides default home environment for its users
     provides.to-users.homeManager =
