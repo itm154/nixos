@@ -19,12 +19,23 @@
       den.aspects.mpv
     ];
 
+    user = {
+      extraGroups = [ "audio" ];
+    };
+
     homeManager =
       { pkgs, ... }:
       {
         # Applications that dont require specific config
         home.packages = with pkgs; [
           lazydocker
+
+          wineWow64Packages.stable
+
+          yabridge
+          yabridgectl
+          carla
+          winetricks
         ];
       };
 

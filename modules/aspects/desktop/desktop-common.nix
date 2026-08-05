@@ -29,6 +29,21 @@
         flatpak.enable = true;
       };
 
+      security.pam.loginLimits = [
+        {
+          domain = "@audio";
+          type = "-";
+          item = "rtprio";
+          value = "99";
+        }
+        {
+          domain = "@audio";
+          type = "-";
+          item = "memlock";
+          value = "unlimited";
+        }
+      ];
+
       security.rtkit.enable = true;
 
       xdg.portal.enable = true;
