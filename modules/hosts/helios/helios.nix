@@ -21,6 +21,7 @@
       # Hardware
       den.aspects.logiops
       (den.aspects.nvidia { enablePrime = true; })
+      den.aspects.printing
     ];
 
     nixos = { pkgs, ... }: {
