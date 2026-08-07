@@ -11,6 +11,7 @@
 
       # Git, terminal, cli applications, etc...
       den.aspects.devtools
+      den.aspects.devenv
 
       # Applications that require config
       den.aspects.kitty
