@@ -23,6 +23,17 @@
       extraGroups = [ "audio" ];
     };
 
+    nixos = {
+      networking.firewall.allowedTCPPorts = [
+        # localsend
+        53317
+      ];
+      networking.firewall.allowedUDPPorts = [
+        # localsend
+        53317
+      ];
+    };
+
     homeManager =
       { pkgs, ... }:
       {
@@ -36,6 +47,8 @@
           yabridgectl
           carla
           winetricks
+
+          localsend
         ];
       };
 
