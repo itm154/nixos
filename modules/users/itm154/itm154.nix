@@ -26,12 +26,12 @@
 
     nixos = {
       networking.firewall.allowedTCPPorts = [
-        # localsend
-        53317
+        53317 # localsend
+        8096 # jellyfin (LAN streaming)
       ];
       networking.firewall.allowedUDPPorts = [
-        # localsend
-        53317
+        53317 # localsend
+        8096 # jellyfin (LAN streaming)
       ];
     };
 
