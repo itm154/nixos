@@ -118,10 +118,10 @@
               searchingActiveBorderColor = [ "#f9e2af" ];
             };
           };
-          git.pagers = [
+          git.diffRenderers = [
             {
               colorArg = "always";
-              pager = "${pkgs.delta}/bin/delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
+              command = "${pkgs.delta}/bin/delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format=\"lazygit-edit://{path}:{line}\"";
             }
           ];
         };
