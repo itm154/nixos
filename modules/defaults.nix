@@ -56,8 +56,13 @@
         extraLocales = [
           "en_US.UTF-8/UTF-8"
           "ms_MY.UTF-8/UTF-8"
+          "en_GB.UTF-8/UTF-8"
           "ja_JP.UTF-8/UTF-8" # ha, weeb
         ];
+        extraLocaleSettings = {
+          LC_TIME = "en_GB.UTF-8";
+          LC_MEASUREMENT = "en_GB.UTF-8";
+        };
       };
 
       # Security & Privilege Escalation

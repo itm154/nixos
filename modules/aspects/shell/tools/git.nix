@@ -56,7 +56,6 @@
             "git@github.com:" = {
               insteadOf = [
                 "github:"
-                "https://github.com"
               ];
             };
             "git@github.com:itm154/" = {

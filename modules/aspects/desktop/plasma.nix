@@ -47,6 +47,7 @@
       };
 
       services.ddccontrol.enable = true;
+      users.users.${user.userName}.extraGroups = [ "i2c" ];
 
       environment.systemPackages = with pkgs; [
         wl-clipboard
