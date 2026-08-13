@@ -18,6 +18,8 @@
       den.aspects.zen-browser
       den.aspects.discord
       den.aspects.mpv
+      den.aspects.gaming
+      den.aspects.virtualization
     ];
 
     user = {
@@ -50,6 +52,8 @@
           winetricks
 
           localsend
+
+          prismlauncher
         ];
       };
 

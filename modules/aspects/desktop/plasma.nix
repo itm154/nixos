@@ -23,7 +23,7 @@
       den.aspects.desktop-common
     ];
 
-    nixos = { pkgs, ... }: {
+    nixos = { pkgs, user, ... }: {
       services = {
         displayManager.plasma-login-manager.enable = true;
         desktopManager.plasma6.enable = true;

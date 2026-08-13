@@ -12,6 +12,7 @@
       };
 
       users.users.${user.userName}.extraGroups = [ "docker" ];
+      networking.firewall.trustedInterfaces = [ "docker0" ];
 
       hardware.nvidia-container-toolkit.enable = lib.mkIf config.hardware.nvidia.enabled true;
     };
