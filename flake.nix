@@ -34,6 +34,10 @@
       url = "github:xarblu/kwin-effects-better-blur-dx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim = {
+      url = "path:/home/itm154/Repository/nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixcord = {
       url = "github:4evy/nixcord";

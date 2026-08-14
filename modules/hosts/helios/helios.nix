@@ -26,7 +26,7 @@
     nixos = { pkgs, ... }: {
       imports = [ /etc/nixos/hardware-configuration.nix ];
 
-      environment.systemPackages = with pkgs; [ neovim ];
+      environment.systemPackages = with pkgs; [ ];
     };
 
     # host provides default home environment for its users
