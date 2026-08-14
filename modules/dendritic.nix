@@ -7,6 +7,8 @@
 
   # other inputs may be defined at a module using them.
   flake-file.inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     den.url = "github:denful/den";
 
     flake-file.url = "github:vic/flake-file";
