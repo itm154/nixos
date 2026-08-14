@@ -12,6 +12,7 @@
       # Git, terminal, cli applications, etc...
       den.aspects.devtools
       den.aspects.devenv
+      den.aspects.zoxide
 
       # Applications that require config
       den.aspects.kitty
