@@ -6,12 +6,13 @@
   };
 
   den.aspects.neovim = {
-    homeManager = { system, ... }: {
-      home.packages = [ inputs.neovim.packages.${system}.default ];
-
-      home.sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
+    nixos = { system, ... }: {
+      programs.neovim = {
+        enable = true;
+        package = inputs.neovim.packages.${system}.default;
+        defaultEditor = true;
+        vimAlias = true;
+        viAlias = true;
       };
     };
   };
