@@ -34,6 +34,10 @@
       url = "github:xarblu/kwin-effects-better-blur-dx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    millennium = {
+      url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     neovim = {
       url = "path:/home/itm154/Repository/nvim";
       inputs.nixpkgs.follows = "nixpkgs";
