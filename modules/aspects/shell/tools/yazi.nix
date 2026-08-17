@@ -112,6 +112,7 @@
       home.packages = with pkgs; [
         mediainfo
         imagemagick
+        trash-cli
       ];
 
       xdg.configFile."yazi/theme.toml".source = "${

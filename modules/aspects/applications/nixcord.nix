@@ -12,8 +12,25 @@
 
       programs.nixcord = {
         enable = true;
-        discord.vencord.enable = true;
-        discord.krisp.enable = true;
+        # Stock Discord Client + Vencord
+        # discord.vencord.enable = true;
+        # discord.krisp.enable = true;
+        # discord.openASAR.enable = true;
+        # discord.branches = [
+        #   "ptb"
+        # ];
+
+        # Vesktop
+        discord.enable = false;
+        vesktop.enable = true;
+
+        # Equibop
+        # discord.enable = false;
+        # equibop.enable = true;
+
+        # Not including legcord here yet cus the icon sucks
+        # Yes that was my real reason
+
         config = {
           useQuickCss = true;
           plugins = {
