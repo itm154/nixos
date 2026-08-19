@@ -32,6 +32,10 @@ update-input input:
 switch *args:
 	nix run .#{{hostname}} -- switch {{args}}
 
+# Rebuild and add to boot menu
+boot *args:
+	nix run .#{{hostname}} -- boot {{args}}
+
 # Rebuild and switch home manager configuration
 home *args:
 	nix run .#{{username}} -- switch {{args}}
