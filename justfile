@@ -5,7 +5,7 @@ hostname := `hostname -s`
 default:
 	just --list
 
-# Run system inside VM
+# Run current configuration inside a VM
 vm:
 	-rm -f ./*.qcow2
 	nix run .#vm
@@ -28,14 +28,10 @@ update-input input:
 	nix run .#write-flake
 	nix flake update {{input}}
 
-# Rebuild and switch NixOS system
+# Rebuild and switch system
 switch *args:
 	nix run .#{{hostname}} -- switch {{args}}
 
 # Rebuild and add to boot menu
 boot *args:
 	nix run .#{{hostname}} -- boot {{args}}
-
-# Rebuild and switch home manager configuration
-home *args:
-	nix run .#{{username}} -- switch {{args}}

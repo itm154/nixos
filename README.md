@@ -1,14 +1,16 @@
-# (WIP) NixOS configuration
+# itm154's NixOS configuration
 
 ## Install
 
-1. Clone the repo
+1. Install the base NixOS system, enable flakes and nix commands
+
+2. Clone the repo
 
 ```sh
 git clone https://github.com/itm154/nixos.git
 ```
 
-2. Rebuild system
+3. Rebuild system
 
 ```sh
 nix run .#hostname -- switch --impure
@@ -37,12 +39,12 @@ _Do not sign the kernels, limine will throw up a checksum mismatch and panic_
 ```sh
 just --list
 Available recipes:
+    boot *args         # Rebuild and add to boot menu
     check              # Check flake outputs and syntax
     default            # List available commands
-    home *args         # Rebuild and switch home manager configuration
-    switch *args       # Rebuild and switch NixOS system
+    switch *args       # Rebuild and switch system
     update             # Update all flake inputs and regenerate flake.nix
     update-input input # Update a specific flake input and regenerate flake.nix
-    vm                 # Run system inside VM
+    vm                 # Run current configuration inside a VM
     write              # Rewrite flake.nix
 ```
