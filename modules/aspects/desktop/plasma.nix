@@ -46,11 +46,12 @@
         SDL_VIDEODRIVER = "wayland";
       };
 
-      services.ddccontrol.enable = true;
+      hardware.i2c.enable = true;
       users.users.${user.userName}.extraGroups = [ "i2c" ];
 
       environment.systemPackages = with pkgs; [
         wl-clipboard
+        ddcutil
       ];
     };
 

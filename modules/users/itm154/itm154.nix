@@ -56,6 +56,10 @@
           localsend
 
           prismlauncher
+
+          reaper
+          fira-sans
+          roboto
         ];
       };
 
