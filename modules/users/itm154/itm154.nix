@@ -22,6 +22,7 @@
       den.aspects.mpv
       den.aspects.gaming
       den.aspects.virtualization
+      den.aspects.tone3000
     ];
 
     user = {
