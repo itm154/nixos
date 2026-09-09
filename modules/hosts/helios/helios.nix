@@ -27,6 +27,12 @@
       imports = [ /etc/nixos/hardware-configuration.nix ];
 
       environment.systemPackages = with pkgs; [ ];
+
+      zramSwap = {
+        enable = true;
+        algorithm = "zstd";
+        memoryPercent = 50;
+      };
     };
 
     # host provides default home environment for its users
