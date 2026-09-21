@@ -61,6 +61,8 @@
           reaper
           fira-sans
           roboto
+
+          libreoffice
         ];
       };
 

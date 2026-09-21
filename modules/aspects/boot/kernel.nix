@@ -10,6 +10,7 @@
       ];
 
       boot.kernelPackages = pkgs.cachyosKernels."linuxPackages-cachyos-${variant}";
+      boot.kernelModules = [ "ntsync" ];
     };
   };
 

@@ -7,9 +7,6 @@
     nixos = { config, ... }: {
       services.tailscale = {
         enable = true;
-
-        # Temporary
-        # I dont wanna log on to tailscale in a vm
         authKeyFile = config.sops.secrets.tailscale_auth_key.path;
       };
 
