@@ -23,6 +23,8 @@
       den.aspects.gaming
       den.aspects.virtualization
       den.aspects.tone3000
+
+      den.aspects.fcitx
     ];
 
     user = {
@@ -64,6 +66,16 @@
 
           libreoffice
         ];
+
+        # Options that idt needs a seperate module
+        programs.obs-studio = {
+          enable = true;
+          package = (
+            pkgs.obs-studio.override {
+              cudaSupport = true;
+            }
+          );
+        };
       };
 
     user = {
