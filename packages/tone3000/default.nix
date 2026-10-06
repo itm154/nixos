@@ -25,11 +25,11 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "tone3000";
-  version = "0.0.9";
+  version = "0.0.11";
 
   src = fetchurl {
     url = "https://github.com/tone-3000/tone3000-plugin/releases/download/v${finalAttrs.version}/TONE3000-v${finalAttrs.version}-linux-x64.tar.gz";
-    hash = "sha256-PiP7Y5ZfMQg0CQwcrgNX6gsnnPwU1pgOO+sLe1pUtUY=";
+    hash = "sha256-0W38+KAHdJ9nItgqnN2FNeETSQLq53P5LDOcgT79kYU=";
   };
 
   nativeBuildInputs = [
