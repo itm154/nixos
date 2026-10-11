@@ -65,6 +65,8 @@
           roboto
 
           libreoffice
+
+          blender
         ];
 
         # Options that idt needs a seperate module
