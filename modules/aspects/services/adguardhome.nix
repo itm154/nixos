@@ -9,9 +9,18 @@
         };
       };
 
+      networking.firewall = {
+        allowedTCPPorts = [
+          53
+          8080
+        ];
+        allowedUDPPorts = [ 53 ];
+      };
+
       networking.nameservers = [
         "127.0.0.1"
         "::1"
+        "1.1.1.1" # Fallback
       ];
 
       services.resolved = {
