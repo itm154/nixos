@@ -67,7 +67,17 @@
           libreoffice
 
           blender
+
+          typst
+
+          # Fonts
+          font-awesome
+          roboto
+          source-sans-pro
+          source-sans
         ];
+
+        fonts.fontconfig.enable = true;
 
         # Options that idt needs a seperate module
         programs.obs-studio = {
