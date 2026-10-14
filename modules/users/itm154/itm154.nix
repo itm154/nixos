@@ -3,20 +3,10 @@
   # user aspect
   den.aspects.itm154 = {
     includes = [
-      den.batteries.define-user
-      den.batteries.primary-user
-      den.batteries.host-aspects
-
-      (den.batteries.user-shell "fish")
-
-      # Git, terminal, cli applications, etc...
-      den.aspects.devtools
-      den.aspects.devenv
-      den.aspects.zoxide
+      den.aspects.itm154-base
 
       # Applications that require config
       den.aspects.kitty
-      den.aspects.neovim
       den.aspects.zen-browser
       den.aspects.discord
       den.aspects.mpv
@@ -26,10 +16,6 @@
 
       den.aspects.fcitx
     ];
-
-    user = {
-      extraGroups = [ "audio" ];
-    };
 
     nixos = {
       networking.firewall.allowedTCPPorts = [
@@ -47,8 +33,6 @@
       {
         # Applications that dont require specific config
         home.packages = with pkgs; [
-          lazydocker
-
           wineWow64Packages.stable
 
           yabridge
@@ -89,9 +73,5 @@
           );
         };
       };
-
-    user = {
-      initialPassword = "1234";
-    };
   };
 }

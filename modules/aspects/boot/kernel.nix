@@ -14,10 +14,12 @@
     };
   };
 
-  # Might add other kernels
-  # zen
-  # xanmod
-  # ...
+  den.aspects.kernel-lts = {
+    nixos = { pkgs, ... }: {
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+      boot.kernelModules = [ "ntsync" ];
+    };
+  };
 }
 
 # Available kernels

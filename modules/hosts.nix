@@ -1,7 +1,8 @@
 # defines all hosts + users + homes.
 # then config their aspects in as many files you want
 {
-  den.hosts.x86_64-linux.helios.users.itm154 = { };
+  den.hosts.x86_64-linux.helios.users.itm154 = { }; # Laptop
+  den.hosts.x86_64-linux.apollo.users.itm154 = { }; # Homelab
   den.homes.x86_64-linux.itm154 = { };
 
   # be sure to add nix-darwin input for this:
