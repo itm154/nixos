@@ -14,6 +14,13 @@
     nixos = { pkgs, ... }: {
       imports = [ /etc/nixos/hardware-configuration.nix ];
       environment.systemPackages = with pkgs; [ ];
+
+      zramSwap = {
+        enable = true;
+        algorithm = "zstd";
+        memoryPercent = 50;
+        priority = 100;
+      };
     };
 
     provides.to-users.homeManager =
