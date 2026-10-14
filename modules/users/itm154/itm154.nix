@@ -29,8 +29,22 @@
     };
 
     homeManager =
-      { pkgs, ... }:
+      { pkgs, osConfig, ... }:
       {
+        programs.ssh.settings = {
+          "*" = {
+            IdentityFile = [
+              osConfig.sops.secrets.helios_ssh_key.path
+            ];
+          };
+
+          # Alias for homelab
+          "apollo" = {
+            HostName = "apollo";
+            User = "itm154";
+          };
+        };
+
         # Applications that dont require specific config
         home.packages = with pkgs; [
           wineWow64Packages.stable

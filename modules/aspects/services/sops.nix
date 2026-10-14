@@ -25,8 +25,11 @@
         owner = "itm154";
       };
 
-      # Temporarry
       sops.secrets.tailscale_auth_key = {
+        owner = "itm154";
+      };
+
+      sops.secrets.helios_ssh_key = {
         owner = "itm154";
       };
     };
