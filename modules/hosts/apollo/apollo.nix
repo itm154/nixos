@@ -18,6 +18,12 @@
       imports = [ /etc/nixos/hardware-configuration.nix ];
       environment.systemPackages = with pkgs; [ ];
 
+      networking.firewall.allowedTCPPorts = [
+        80
+        81
+        443
+      ];
+
       zramSwap = {
         enable = true;
         algorithm = "zstd";
