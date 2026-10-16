@@ -24,6 +24,11 @@
         memoryPercent = 50;
         priority = 100;
       };
+
+      systemd.tmpfiles.rules = [
+        "d /srv/docker 0775 itm154 users -"
+        "d /srv/media 0775 itm154 users -"
+      ];
     };
 
     provides.to-users.homeManager =
