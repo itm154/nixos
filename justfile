@@ -11,8 +11,8 @@ vm:
 	nix run .#vm
 
 # Check flake outputs and syntax
-check:
-	nix flake check
+check *args:
+	nix flake check {{args}}
 
 # Rewrite flake.nix
 write:

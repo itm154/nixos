@@ -9,6 +9,7 @@
       den.aspects.docker
       # den.aspects.podman
       den.aspects.tailscale
+      den.aspects.adguardhome
     ];
 
     nixos = { pkgs, ... }: {
