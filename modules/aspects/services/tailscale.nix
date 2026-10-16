@@ -27,6 +27,10 @@
       # (Optional but recommended for faster boot with VPNs)
       systemd.network.wait-online.enable = false;
       boot.initrd.systemd.network.wait-online.enable = false;
+
+      # IP forwarding to access home LAN away from home
+      boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
+      boot.kernel.sysctl."net.ipv6.conf.all.forwarding" = 1;
     };
   };
 }
