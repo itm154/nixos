@@ -10,6 +10,8 @@
       # den.aspects.podman
       den.aspects.tailscale
       den.aspects.adguardhome
+
+      den.aspects.tmux
     ];
 
     nixos = { pkgs, ... }: {
