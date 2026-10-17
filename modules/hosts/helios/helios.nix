@@ -15,7 +15,7 @@
       den.aspects.tailscale
       # den.aspects.podman
       den.aspects.docker
-      den.aspects.adguardhome
+      # den.aspects.adguardhome
 
       # Hardware
       den.aspects.logiops
