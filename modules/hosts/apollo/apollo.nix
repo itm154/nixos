@@ -16,13 +16,28 @@
 
     nixos = { pkgs, ... }: {
       imports = [ /etc/nixos/hardware-configuration.nix ];
-      environment.systemPackages = with pkgs; [ ];
+      environment.systemPackages = with pkgs; [ ethtool ];
 
       networking.firewall.allowedTCPPorts = [
         80
         81
         443
       ];
+
+      # Workaround for Intel I219-LM e1000e hardware unit hangs & power saving
+      boot.kernelParams = [ "pcie_aspm=off" ];
+      boot.extraModprobeConfig = "options e1000e EEE=0";
+
+      services.udev.extraRules = ''
+        ACTION=="add", SUBSYSTEM=="net", DRIVERS=="e1000e", RUN+="${pkgs.ethtool}/sbin/ethtool -K %k tso off gso off gro off"
+        ACTION=="add", SUBSYSTEM=="net", DRIVERS=="e1000e", RUN+="${pkgs.ethtool}/sbin/ethtool --set-eee %k eee off"
+      '';
+
+      # Prevent homelab server from sleeping or suspending
+      systemd.targets.sleep.enable = false;
+      systemd.targets.suspend.enable = false;
+      systemd.targets.hibernate.enable = false;
+      systemd.targets.hybrid-sleep.enable = false;
 
       zramSwap = {
         enable = true;
