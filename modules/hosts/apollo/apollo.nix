@@ -28,10 +28,22 @@
       boot.kernelParams = [ "pcie_aspm=off" ];
       boot.extraModprobeConfig = "options e1000e EEE=0";
 
-      services.udev.extraRules = ''
-        ACTION=="add", SUBSYSTEM=="net", DRIVERS=="e1000e", RUN+="${pkgs.ethtool}/sbin/ethtool -K %k tso off gso off gro off"
-        ACTION=="add", SUBSYSTEM=="net", DRIVERS=="e1000e", RUN+="${pkgs.ethtool}/sbin/ethtool --set-eee %k eee off"
-      '';
+      systemd.services.e1000e-workaround = {
+        description = "Disable TSO/GSO/GRO and EEE on Intel I219 e1000e NIC";
+        wantedBy = [ "multi-user.target" ];
+        after = [
+          "network.target"
+          "NetworkManager.service"
+        ];
+        script = ''
+          ${pkgs.ethtool}/sbin/ethtool -K eno1 tso off gso off gro off || true
+          ${pkgs.ethtool}/sbin/ethtool --set-eee eno1 eee off || true
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
+      };
 
       # Prevent homelab server from sleeping or suspending
       systemd.targets.sleep.enable = false;
@@ -48,7 +60,7 @@
 
       systemd.tmpfiles.rules = [
         "d /srv/docker 0775 itm154 users -"
-        "d /srv/media 2775 itm154 users -"
+        "d /srv/data 2775 itm154 users -"
       ];
     };
 

@@ -269,8 +269,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1791730620,
-        "narHash": "sha256-Ngwko4Ern58ODjKhzF5p8edNhNSc8sOguZDY0j55iqg=",
+        "lastModified": 1792129603,
+        "narHash": "sha256-FvmNmrvi0hD6z/X97dzefEnDp2JVJV64L57qme8XMfQ=",
         "path": "/home/itm154/Repository/nvim",
         "type": "path"
       },
