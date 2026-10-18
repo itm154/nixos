@@ -24,19 +24,28 @@
         443
       ];
 
+      # Distribute hardware interrupts across all 6 CPU cores
+      services.irqbalance.enable = true;
+
       # Workaround for Intel I219-LM e1000e hardware unit hangs & power saving
       boot.kernelParams = [ "pcie_aspm=off" ];
-      boot.extraModprobeConfig = "options e1000e EEE=0";
+      boot.extraModprobeConfig = "options e1000e SmartPowerDownEnable=0";
 
       systemd.services.e1000e-workaround = {
-        description = "Disable TSO/GSO/GRO and EEE on Intel I219 e1000e NIC";
+        description = "Tune Intel I219 e1000e NIC buffers and offloads";
         wantedBy = [ "multi-user.target" ];
         after = [
           "network.target"
           "NetworkManager.service"
         ];
         script = ''
-          ${pkgs.ethtool}/sbin/ethtool -K eno1 tso off gso off gro off || true
+          # Maximize RX and TX ring buffers to 4096 (prevents packet drops under CPU load)
+          ${pkgs.ethtool}/sbin/ethtool -G eno1 rx 4096 tx 4096 || true
+
+          # Disable offloads that cause hardware unit hangs
+          ${pkgs.ethtool}/sbin/ethtool -K eno1 tso off gso off gro off tx off rx off || true
+
+          # Disable Energy Efficient Ethernet
           ${pkgs.ethtool}/sbin/ethtool --set-eee eno1 eee off || true
         '';
         serviceConfig = {
