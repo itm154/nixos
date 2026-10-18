@@ -24,6 +24,10 @@
         443
       ];
 
+      # =========================================================================================
+      # WARNING: This section is mostly added by gemini/antigravity
+      # I was tired of debugging network issues
+
       # Distribute hardware interrupts across all CPU cores
       services.irqbalance.enable = true;
 
@@ -82,6 +86,8 @@
       systemd.targets.suspend.enable = false;
       systemd.targets.hibernate.enable = false;
       systemd.targets.hybrid-sleep.enable = false;
+
+      # =========================================================================================
 
       zramSwap = {
         enable = true;
