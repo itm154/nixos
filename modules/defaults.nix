@@ -35,6 +35,7 @@
 
       # Networking
       networking = {
+        nftables.enable = true;
         firewall = {
           enable = true;
           allowedTCPPorts = [

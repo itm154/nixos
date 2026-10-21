@@ -21,14 +21,18 @@
 
       users.users.${user.userName}.extraGroups = [ "docker" ];
       networking.firewall = {
-        checkReversePath = false;
-        trustedInterfaces = [
-          "docker0"
-          "br-+"
-        ];
-        extraCommands = ''
-          iptables -I FORWARD 1 -i br-+ -j ACCEPT
-          iptables -I FORWARD 1 -o br-+ -j ACCEPT
+        checkReversePath = "loose";
+
+        extraInputRules = ''
+          iifname "docker0" accept
+          iifname "br-*" accept
+        '';
+
+        extraForwardRules = ''
+          iifname "docker0" accept
+          oifname "docker0" accept
+          iifname "br-*" accept
+          oifname "br-*" accept
         '';
       };
 
