@@ -1,71 +1,28 @@
-# WARNING THIS IS AI SLOP
-# But to my credit i did this on my own 2 years ago
-# https://github.com/frederik-h/acer-wmi-battery/issues/60
-# I just didn't know how to deal with CLANG and GCC optionals
-
 { den, lib, ... }: {
   den.aspects.acer = {
     nixos =
       { config, pkgs, ... }:
       let
-        acer-wmi-battery = config.boot.kernelPackages.callPackage (
-          {
-            lib,
-            kernel,
-          }:
-          kernel.stdenv.mkDerivation {
-            pname = "acer-wmi-battery";
-            version = "0.2.0";
+        # Temporary fix until https://github.com/NixOS/nixpkgs/pull/577973 is merged
+        kpkgs = config.boot.kernelPackages;
 
-            src = pkgs.fetchFromGitHub {
-              owner = "frederik-h";
-              repo = "acer-wmi-battery";
-              rev = "9f90d75cc9237aeed7964622d10dbdf4d2c7b518";
-              sha256 = "sha256-CyKRpE3cnhEIFHc4Hal2PQUW7cd5k8+55S4QdSqGvNI=";
-            };
+        acer-wmi-battery = kpkgs.acer-wmi-battery.overrideAttrs (old: {
+          makeFlags = (old.makeFlags or [ ]) ++ [
+            "INSTALL_MOD_PATH=${placeholder "out"}"
+            "INSTALL_MOD_DIR=kernel/drivers/platform/x86"
+            "INSTALL_MOD_STRIP=1"
+            "DEPMOD=true"
+          ];
 
-            nativeBuildInputs = kernel.moduleBuildDependencies;
+          installFlags = [
+            "-C"
+            "${kpkgs.kernel.dev}/lib/modules/${kpkgs.kernel.modDirVersion}/build"
+            "M=$(PWD)"
+          ];
 
-            hardeningDisable = [
-              "pic"
-              "format"
-            ];
-
-            makeFlags = lib.unique (
-              (builtins.filter (x: !(lib.hasPrefix "O=" x || lib.hasPrefix "--eval=" x)) kernel.makeFlags)
-              ++ [
-                "KDIR=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
-              ]
-              ++
-                lib.optionals
-                  (kernel.stdenv.cc.isClang or false || lib.any (lib.hasPrefix "LLVM=") kernel.makeFlags)
-                  [
-                    "LLVM=1"
-                    "LLVM_IAS=1"
-                  ]
-            );
-
-            buildPhase = ''
-              runHook preBuild
-              make -C ${kernel.dev}/lib/modules/${kernel.modDirVersion}/build M=$(pwd) $makeFlags modules
-              runHook postBuild
-            '';
-
-            installPhase = ''
-              runHook preInstall
-              mkdir -p $out/lib/modules/${kernel.modDirVersion}/extra
-              cp acer-wmi-battery.ko $out/lib/modules/${kernel.modDirVersion}/extra/
-              runHook postInstall
-            '';
-
-            meta = with lib; {
-              description = "A linux kernel driver for the Acer WMI battery health control interface";
-              homepage = "https://github.com/frederik-h/acer-wmi-battery";
-              license = licenses.gpl2Only;
-              platforms = platforms.linux;
-            };
-          }
-        ) { };
+          installTargets = [ "modules_install" ];
+          installPhase = null;
+        });
 
         healthmode = pkgs.writeShellApplication {
           name = "healthmode";

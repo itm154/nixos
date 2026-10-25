@@ -1,4 +1,3 @@
-# DO-NOT-EDIT. This file was auto-generated using github:denful/flake-file.
 # Use `nix run .#write-flake` to regenerate it.
 {
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
@@ -6,11 +5,11 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.lantian.pub/lantian"
-      "https://cache.xinux.uz"
+      # "https://cache.xinux.uz"
     ];
     extra-trusted-public-keys = [
       "lantian:WVGO7vsRMSEN+h7Lp7kv6SAmrkEXgUGbbXm7jMDjBuQ="
-      "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
+      # "cache.xinux.uz:BXCrtqejFjWzWEB9YuGB7X2MV4ttBur1N8BkwQRdH+0="
     ];
   };
 
