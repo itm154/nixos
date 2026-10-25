@@ -87,13 +87,6 @@
 
       # Override this if using plasma
       services.gnome.gnome-keyring.enable = lib.mkDefault true;
-
-      # https://emudhra.we-have-a-problem.com/
-      # Remove in the future
-      security.pki.caCertificateBlacklist = [
-        "Comodo AAA Services root"
-        "emSign ECC Root CA - G3"
-      ];
     };
 
     homeManager = { pkgs, ... }: {
