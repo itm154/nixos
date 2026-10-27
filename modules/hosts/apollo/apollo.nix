@@ -100,6 +100,35 @@
         "d /srv/docker 0775 itm154 users -"
         "d /srv/data 2775 itm154 users -"
       ];
+
+      # Homelab monitoring
+      # Moved this from docker into a nix service since it seems pretty important
+      services.beszel = {
+        hub = {
+          enable = true;
+          host = "0.0.0.0";
+          environment = {
+            APP_URL = "https://beszel.itm154.com";
+          };
+        };
+        agent = {
+          enable = true;
+          environment = {
+            LISTEN = "45876";
+            KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTgGh7pIbdyYdU9861k1eV4rbTxTuwTI63fERabWpCQ";
+            TOKEN = "b38b8c63-eac0-4837-bd2a-ae33e57e8c5c";
+            HUB_URL = "https://beszel.itm154.com";
+            GPU_COLLECTOR = [ "intel_gpu_top" ];
+          };
+          smartmon = {
+            enable = true;
+            deviceAllow = [
+              "/dev/nvme0"
+              "/dev/nvme0n1"
+            ];
+          };
+        };
+      };
     };
 
     provides.to-users.homeManager =
