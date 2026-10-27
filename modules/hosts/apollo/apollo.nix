@@ -103,6 +103,49 @@
 
       # Homelab monitoring
       # Moved this from docker into a nix service since it seems pretty important
+      # =========================================================================
+      # FIXME: Temporary override to Beszel 0.21.1 to fix intel-gpu-top parsing bug.
+      # Remove this overlay once nixpkgs is updated to beszel >= 0.21.1.
+      nixpkgs.overlays = [
+        (final: prev: {
+          beszel = prev.beszel.overrideAttrs (oldAttrs: rec {
+            version = "0.21.1";
+            src = prev.fetchFromGitHub {
+              owner = "henrygd";
+              repo = "beszel";
+              tag = "v${version}";
+              hash = "sha256-OB1pbfUKeE+tu/ehhoJhkPBmOBDLiQzGxb74bin2Qmg=";
+            };
+            webui = prev.buildNpmPackage {
+              pname = "beszel-webui";
+              inherit version src;
+              sourceRoot = "${src.name}/internal/site";
+              npmDepsHash = "sha256-pL4Qmi17CC4t6G/Mw/AgZUPf6cl0UPm75zfHVfrkoKI=";
+              npmFlags = [ "--legacy-peer-deps" ];
+              buildPhase = ''
+                runHook preBuild
+                npx lingui extract --overwrite
+                npx lingui compile
+                node --max_old_space_size=1024000 ./node_modules/vite/bin/vite.js build
+                runHook postBuild
+              '';
+              installPhase = ''
+                runHook preInstall
+                mkdir -p $out
+                cp -r dist/* $out
+                runHook postInstall
+              '';
+            };
+            vendorHash = "sha256-NStpXYnaVkJxmzT1fIPFqSNbNSJqpnC0LsVQweFOwcI=";
+            preBuild = ''
+              mkdir -p internal/site/dist
+              cp -r ${webui}/* internal/site/dist
+            '';
+          });
+        })
+      ];
+      # =========================================================================
+
       services.beszel = {
         hub = {
           enable = true;
