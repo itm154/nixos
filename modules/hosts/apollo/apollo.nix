@@ -24,56 +24,42 @@
         443
       ];
 
-      # =========================================================================================
-      # WARNING: This section is mostly added by gemini/antigravity
-      # I was tired of debugging network issues
-
-      # Distribute hardware interrupts across all CPU cores
+      # Network tuning
+      # Enable Google's BBR tcp congestion algorithm
+      # https://tie.pub/en/blog/how-to-deploy-google-bbr-on-linux/
       services.irqbalance.enable = true;
-
-      # Google BBR & High-Throughput Network Stack Tuning (for BitTorrent & Jellyfin streaming)
       boot.kernelModules = [ "tcp_bbr" ];
       boot.kernel.sysctl = {
-        # BBR Congestion Control & FQ scheduler
         "net.core.default_qdisc" = "fq";
         "net.ipv4.tcp_congestion_control" = "bbr";
-
-        # Buffer sizing for Gigabit / 2.5G transfers & multi-peer swarms
-        "net.core.rmem_max" = 16777216; # 16 MB
-        "net.core.wmem_max" = 16777216; # 16 MB
-        "net.core.rmem_default" = 1048576;
-        "net.core.wmem_default" = 1048576;
-        "net.core.netdev_max_backlog" = 16384;
-
-        # Fast socket cleanup under high peer connection counts
-        "net.ipv4.tcp_tw_reuse" = 1;
-        "net.ipv4.tcp_fin_timeout" = 15;
       };
 
-      # Keep Realtek RTL8156B 2.5G USB NIC permanently awake (disable autosuspend)
+      # Disable autosuspend for USB with external NIC attached
       services.udev.extraRules = ''
         ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0bda", ATTR{idProduct}=="8156", ATTR{power/control}="on", ATTR{power/autosuspend}="-1"
       '';
 
-      # Workaround for Intel I219-LM e1000e hardware unit hangs & power saving
+      # =========================================================================================
+      # WARNING: This section is mostly added by gemini/antigravity
+      # I manually verified what it does
+      # Looks like its pulling from here
+      # https://community-scripts.org/scripts/nic-offloading-fix?id=nic-offloading-fix
+      # Workarounds for Intel I219-LM problem
+
       boot.kernelParams = [ "pcie_aspm=off" ];
       boot.extraModprobeConfig = "options e1000e SmartPowerDownEnable=0";
 
       systemd.services.nic-tuning = {
-        description = "Tune network interface buffers and power saving";
+        description = "Disable EEE and offload for network cards";
         wantedBy = [ "multi-user.target" ];
         after = [
           "network.target"
           "NetworkManager.service"
         ];
         script = ''
-          # Disable EEE latency transitions on Realtek 2.5G USB NIC
           ${pkgs.ethtool}/sbin/ethtool --set-eee enp0s20f0u1 eee off || true
-
-          # Keep Intel I219 tuned if ever plugged in
-          ${pkgs.ethtool}/sbin/ethtool -G eno1 rx 4096 tx 4096 || true
-          ${pkgs.ethtool}/sbin/ethtool -K eno1 tso off gso off gro off tx off rx off || true
           ${pkgs.ethtool}/sbin/ethtool --set-eee eno1 eee off || true
+          ${pkgs.ethtool}/sbin/ethtool -K gso off gro off tso off tx off rx off rxvlan off txvlan off sg off || true
         '';
         serviceConfig = {
           Type = "oneshot";
