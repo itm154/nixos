@@ -1,7 +1,7 @@
 { den, inputs, ... }: {
   flake-file.inputs = {
-    # neovim.url = "github:itm154/nvim";
-    neovim.url = "path:/home/itm154/Repository/nvim";
+    neovim.url = "github:itm154/nvim";
+    # neovim.url = "path:/home/itm154/Repository/nvim";
     neovim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
