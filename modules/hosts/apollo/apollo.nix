@@ -16,7 +16,10 @@
 
     nixos = { pkgs, ... }: {
       imports = [ /etc/nixos/hardware-configuration.nix ];
-      environment.systemPackages = with pkgs; [ ethtool ];
+      environment.systemPackages = with pkgs; [
+        sops
+        ethtool
+      ];
 
       networking.firewall.allowedTCPPorts = [
         80
