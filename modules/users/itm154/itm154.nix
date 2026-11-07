@@ -47,32 +47,22 @@
 
         # Applications that dont require specific config
         home.packages = with pkgs; [
+          carla
+          libreoffice
+          localsend
+          prismlauncher
+          typst
           wineWow64Packages.stable
-
+          winetricks
           yabridge
           yabridgectl
-          carla
-          winetricks
-
-          localsend
-
-          prismlauncher
-
-          reaper
-          fira-sans
-          roboto
-
-          libreoffice
-
-          blender
-
-          typst
 
           # Fonts
+          fira-sans
           font-awesome
           roboto
-          source-sans-pro
           source-sans
+          source-sans-pro
         ];
 
         fonts.fontconfig.enable = true;

@@ -68,7 +68,7 @@
         })
         klassy
         bibata-cursors
-        python314Packages.kde-material-you-colors
+        kde-material-you-colors
         inputs.kwin-effects-better-blur-dx.packages.${system}.default
         inputs.appgrid.packages.${system}.default
 
