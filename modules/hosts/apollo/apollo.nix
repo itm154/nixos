@@ -6,12 +6,8 @@
 
       den.aspects.kernel-lts
       (den.aspects.bootloader { secureBoot = false; })
-      den.aspects.ssh
-      den.aspects.docker
-      den.aspects.tailscale
-      den.aspects.adguardhome
-      den.aspects.tmux
-      den.aspects.neovim
+
+      den.aspects.profiles.server
     ];
 
     nixos = { pkgs, ... }: {

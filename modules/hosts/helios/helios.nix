@@ -9,24 +9,9 @@
       (den.aspects.kernel-cachyos "latest-lto-x86_64-v3")
       (den.aspects.bootloader { secureBoot = true; })
       den.aspects.acer
-      den.aspects.plasma
-
-      # Applications and services
-      den.aspects.tailscale
-      # den.aspects.podman
-      den.aspects.docker
-      # den.aspects.adguardhome
-
-      # Hardware
-      den.aspects.logiops
       (den.aspects.nvidia { enablePrime = true; })
-      den.aspects.printing
 
-      den.aspects.neovim
-
-      den.aspects.virtualization
-      # den.aspects.gaming
-      den.aspects.fcitx
+      den.aspects.profiles.workstation
     ];
 
     nixos = { pkgs, ... }: {
