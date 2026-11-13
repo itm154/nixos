@@ -12,9 +12,6 @@
       den.aspects.devtools
       den.aspects.devenv
       den.aspects.zoxide
-
-      # Terminal editor
-      den.aspects.neovim
     ];
 
     user = {

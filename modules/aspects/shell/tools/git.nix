@@ -3,7 +3,6 @@
   den.aspects.git = {
     includes = [
       den.aspects.sops
-      den.aspects.ssh
     ];
 
     homeManager = { pkgs, osConfig, ... }: {

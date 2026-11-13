@@ -1,16 +1,5 @@
 { den, ... }: {
   den.aspects.fish = {
-    # includes = [
-    #   (den.batteries.user-shell "fish")
-    # ];
-
-    nixos = { pkgs, ... }: {
-      environment.systemPackages = with pkgs; [
-        fishPlugins.autopair
-        fishPlugins.bang-bang
-      ];
-    };
-
     homeManager = { pkgs, ... }: {
       programs.fish = {
         enable = true;

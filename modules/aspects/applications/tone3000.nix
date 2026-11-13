@@ -26,20 +26,6 @@ in
         home.file.".config/TONE3000/Presets/Factory".source =
           "${pkgs.tone3000}/share/TONE3000/Presets/Factory";
       };
-
-    nixos =
-      { pkgs, ... }:
-      {
-        nixpkgs.overlays = [
-          overlay
-        ];
-
-        environment.sessionVariables = {
-          GIO_EXTRA_MODULES = [
-            "${pkgs.glib-networking}/lib/gio/modules"
-          ];
-        };
-      };
   };
 
   perSystem =

@@ -21,6 +21,12 @@
       den.aspects.logiops
       (den.aspects.nvidia { enablePrime = true; })
       den.aspects.printing
+
+      den.aspects.neovim
+
+      den.aspects.virtualization
+      # den.aspects.gaming
+      den.aspects.fcitx
     ];
 
     nixos = { pkgs, ... }: {
@@ -32,6 +38,11 @@
         enable = true;
         algorithm = "zstd";
         memoryPercent = 50;
+      };
+
+      networking.firewall = {
+        allowedTCPPorts = [ 53317 ];
+        allowedUDPPorts = [ 53317 ];
       };
     };
 

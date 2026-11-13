@@ -13,20 +13,7 @@
       den.aspects.gaming
       den.aspects.virtualization
       den.aspects.tone3000
-
-      den.aspects.fcitx
     ];
-
-    nixos = {
-      networking.firewall.allowedTCPPorts = [
-        53317 # localsend
-        8096 # jellyfin (LAN streaming)
-      ];
-      networking.firewall.allowedUDPPorts = [
-        53317 # localsend
-        8096 # jellyfin (LAN streaming)
-      ];
-    };
 
     homeManager =
       { pkgs, osConfig, ... }:

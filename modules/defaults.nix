@@ -105,4 +105,5 @@
 
   # Enable Home Manager by default for users
   den.schema.user.classes = lib.mkDefault [ "homeManager" ];
+  den.migrations.user-host-content.acknowledged = true;
 }
