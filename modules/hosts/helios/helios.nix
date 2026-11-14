@@ -15,7 +15,7 @@
     ];
 
     nixos = { pkgs, ... }: {
-      imports = [ /etc/nixos/hardware-configuration.nix ];
+      imports = [ ./_hardware-configuration/hardware-configuration.nix ];
 
       environment.systemPackages = with pkgs; [ ];
 
